@@ -64,11 +64,11 @@ const priceComparisonData = [
 ];
 
 const topBrandsData = [
-  { brand: 'Greenfields', astroSales: 2500000, segariSales: 1800000 },
-  { brand: 'Ultramilk', astroSales: 3200000, segariSales: 2100000 },
-  { brand: 'Diamond', astroSales: 1800000, segariSales: 2200000 },
-  { brand: 'Prochiz', astroSales: 1500000, segariSales: 1600000 },
-  { brand: 'Mimi White', astroSales: 1200000, segariSales: 1400000 },
+  { brand: 'Greenfields', astroSales: 2500000, segariSales: 1800000, alfagiftSales: 1200000, klickIndomaretSales: 1600000, mysuperindoSales: 900000 },
+  { brand: 'Ultramilk', astroSales: 3200000, segariSales: 2100000, alfagiftSales: 1800000, klickIndomaretSales: 2200000, mysuperindoSales: 1300000 },
+  { brand: 'Diamond', astroSales: 1800000, segariSales: 2200000, alfagiftSales: 1500000, klickIndomaretSales: 1900000, mysuperindoSales: 1100000 },
+  { brand: 'Prochiz', astroSales: 1500000, segariSales: 1600000, alfagiftSales: 1300000, klickIndomaretSales: 1400000, mysuperindoSales: 800000 },
+  { brand: 'Mimi White', astroSales: 1200000, segariSales: 1400000, alfagiftSales: 1000000, klickIndomaretSales: 1100000, mysuperindoSales: 700000 },
 ];
 
 const inventoryAreaData = [
@@ -143,6 +143,14 @@ const dailySalesByBrand = [
   { date: '26 May', ultraMilk: 1400, prochiz: 900, greenfields: 700, diamond: 450, mimiWhite: 350 },
   { date: '28 May', ultraMilk: 1500, prochiz: 950, greenfields: 750, diamond: 480, mimiWhite: 380 },
   { date: '30 May', ultraMilk: 1600, prochiz: 1000, greenfields: 800, diamond: 500, mimiWhite: 400 },
+];
+
+const dailySalesByChannel = [
+  { date: '22 May', segari: 800, astro: 650, klickIndomaret: 600, alfagift: 500, superindo: 450, mysuperindo: 300 },
+  { date: '24 May', segari: 850, astro: 700, klickIndomaret: 650, alfagift: 550, superindo: 480, mysuperindo: 320 },
+  { date: '26 May', segari: 900, astro: 750, klickIndomaret: 700, alfagift: 600, superindo: 500, mysuperindo: 350 },
+  { date: '28 May', segari: 950, astro: 800, klickIndomaret: 750, alfagift: 650, superindo: 520, mysuperindo: 380 },
+  { date: '30 May', segari: 1000, astro: 850, klickIndomaret: 800, alfagift: 700, superindo: 550, mysuperindo: 400 },
 ];
 
 const topBrandSales = [
@@ -293,11 +301,11 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8'];
 const Dashboard = () => {
   const [currentPage, setCurrentPage] = useState('overview');
   const [selectedBrandFilter, setSelectedBrandFilter] = useState('all');
-  const [dailySalesView, setDailySalesView] = useState('category'); // 'category' or 'brand'
+  const [dailySalesView, setDailySalesView] = useState('category'); // 'category', 'brand', or 'channel'
 
   const navigationItems = [
     { id: 'overview', label: 'Overview', icon: BarChart3 },
-    { id: 'sales', label: 'Sales Analysis', icon: Activity },
+    { id: 'sales', label: 'Brand Sales', icon: Activity },
     { id: 'inventory', label: 'Stock Movement', icon: Package },
     { id: 'brands', label: 'Brand & Product', icon: TrendingUp },
     { id: 'assortment', label: 'Assortment Analysis', icon: Package },
@@ -452,15 +460,157 @@ const Dashboard = () => {
           </ResponsiveContainer>
         </CardContent>
       </Card>
+
+      {/* Added Out of Stock Monitoring with Brand POV: Greenfields Analysis */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Out of Stock Monitoring with Brand POV: Greenfields Analysis</CardTitle>
+          <CardDescription>High demand items with OOS issues</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            <div className="p-4 border rounded-lg bg-red-50">
+              <h4 className="font-semibold text-red-800">🚨 Critical OOS Alert - Greenfields</h4>
+              <p className="text-sm text-red-700 mt-1">High demand product experiencing frequent stockouts</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-3">
+                <h5 className="font-medium">Areas with High Demand but OOS:</h5>
+                {[
+                  { area: 'Jakarta Utara', demand: 'High', oos: 15, impact: 'Critical', channel: 'Segari, Astro' },
+                  { area: 'Bandung', demand: 'High', oos: 12, impact: 'High', channel: 'Klik Indomaret' },
+                  { area: 'Surabaya', demand: 'Medium', oos: 8, impact: 'Medium', channel: 'Alfagift, SuperIndo' },
+                ].map((item, index) => (
+                  <div key={index} className="flex justify-between items-center p-2 border-b">
+                    <div>
+                      <div className="font-medium">{item.area}</div>
+                      <div className="text-sm text-muted-foreground">Demand: {item.demand}</div>
+                      <div className="text-xs text-red-600">Channel OOS: {item.channel}</div>
+                    </div>
+                    <div className="text-right">
+                      <div className="font-bold text-red-600">{item.oos} OOS</div>
+                      <Badge variant={item.impact === 'Critical' ? 'destructive' : 'secondary'}>
+                        {item.impact}
+                      </Badge>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="space-y-3">
+                <h5 className="font-medium">Recommended Actions:</h5>
+                <div className="space-y-2">
+                  <div className="p-2 bg-green-50 rounded border">
+                    <div className="text-sm font-medium text-green-800">Increase Safety Stock</div>
+                    <div className="text-xs text-green-600">+25% in Jakarta Utara</div>
+                  </div>
+                  <div className="p-2 bg-blue-50 rounded border">
+                    <div className="text-sm font-medium text-blue-800">Faster Restock Cycle</div>
+                    <div className="text-xs text-blue-600">4.2 days → 2.5 days</div>
+                  </div>
+                  <div className="p-2 bg-yellow-50 rounded border">
+                    <div className="text-sm font-medium text-yellow-800">Alternative Products</div>
+                    <div className="text-xs text-yellow-600">Promote similar items</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 
   const renderSalesAnalysis = () => (
     <div className="space-y-6">
+      {/* KPI Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Total Sales</CardTitle>
+            <DollarSign className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">IDR 17.04B</div>
+            <p className="text-xs text-green-600">+12.3% from last month</p>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Total Units Sold</CardTitle>
+            <ShoppingCart className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">391,853</div>
+            <p className="text-xs text-green-600">+8.7% from last month</p>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Total SKU</CardTitle>
+            <Package className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">29,940</div>
+            <p className="text-xs text-muted-foreground">Active products</p>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Brand Market Share (Greenfields)</CardTitle>
+            <PieChartIcon className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">8.58%</div>
+            <p className="text-xs text-red-600">-5.3% growth rate</p>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Top Brand Sales - moved to top after KPI cards */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Top Brand Sales</CardTitle>
+          <CardDescription>Leading brands by market share and growth</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="max-h-96 overflow-y-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Brand</TableHead>
+                  <TableHead className="text-center">Market Share (%)</TableHead>
+                  <TableHead className="text-center">Total Sales (IDR)</TableHead>
+                  <TableHead className="text-center">Growth Rate (%)</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {topBrandSales.map((brand, index) => (
+                  <TableRow key={index}>
+                    <TableCell className="font-medium">{brand.brand}</TableCell>
+                    <TableCell className="text-center">{brand.marketShare}%</TableCell>
+                    <TableCell className="text-center">IDR {(brand.salesValue / 1000000000).toFixed(2)}B</TableCell>
+                    <TableCell className="text-center">
+                      <Badge variant={brand.growth > 0 ? "default" : "destructive"}>
+                        {brand.growth > 0 ? "+" : ""}{brand.growth}%
+                      </Badge>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        </CardContent>
+      </Card>
+
       <Card>
         <CardHeader>
           <CardTitle>Daily Detailed Sales</CardTitle>
-          <CardDescription>Sales tracking across different sub categories and brands</CardDescription>
+          <CardDescription>Sales tracking across different sub categories, brands, and channels</CardDescription>
           <div className="flex gap-2 mt-2">
             <Button 
               variant={dailySalesView === 'category' ? 'default' : 'outline'} 
@@ -476,6 +626,13 @@ const Dashboard = () => {
             >
               Brand
             </Button>
+            <Button 
+              variant={dailySalesView === 'channel' ? 'default' : 'outline'} 
+              size="sm"
+              onClick={() => setDailySalesView('channel')}
+            >
+              Channel
+            </Button>
           </div>
         </CardHeader>
         <CardContent>
@@ -490,7 +647,7 @@ const Dashboard = () => {
                 <Area type="monotone" dataKey="susu" stackId="1" stroke="#8884d8" fill="#8884d8" name="Susu" />
                 <Area type="monotone" dataKey="tisu" stackId="1" stroke="#82ca9d" fill="#82ca9d" name="Tisu" />
               </AreaChart>
-            ) : (
+            ) : dailySalesView === 'brand' ? (
               <AreaChart data={dailySalesByBrand}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="date" />
@@ -502,6 +659,20 @@ const Dashboard = () => {
                 <Area type="monotone" dataKey="greenfields" stackId="1" stroke="#ffc658" fill="#ffc658" name="Greenfields" />
                 <Area type="monotone" dataKey="diamond" stackId="1" stroke="#ff7300" fill="#ff7300" name="Diamond" />
                 <Area type="monotone" dataKey="mimiWhite" stackId="1" stroke="#00ff00" fill="#00ff00" name="Mimi White" />
+              </AreaChart>
+            ) : (
+              <AreaChart data={dailySalesByChannel}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="date" />
+                <YAxis />
+                <RechartsTooltip />
+                <Legend />
+                <Area type="monotone" dataKey="segari" stackId="1" stroke="#8884d8" fill="#8884d8" name="Segari" />
+                <Area type="monotone" dataKey="astro" stackId="1" stroke="#82ca9d" fill="#82ca9d" name="Astro" />
+                <Area type="monotone" dataKey="klickIndomaret" stackId="1" stroke="#ffc658" fill="#ffc658" name="Klik Indomaret" />
+                <Area type="monotone" dataKey="alfagift" stackId="1" stroke="#ff7300" fill="#ff7300" name="Alfagift" />
+                <Area type="monotone" dataKey="superindo" stackId="1" stroke="#00ff00" fill="#00ff00" name="SuperIndo" />
+                <Area type="monotone" dataKey="mysuperindo" stackId="1" stroke="#ff0080" fill="#ff0080" name="MySuperIndo" />
               </AreaChart>
             )}
           </ResponsiveContainer>
@@ -538,30 +709,57 @@ const Dashboard = () => {
 
         <Card>
           <CardHeader>
-            <CardTitle>Area Sales</CardTitle>
-            <CardDescription>Sales performance by geographical area</CardDescription>
+            <CardTitle>Sales by Channel</CardTitle>
+            <CardDescription>Channel distribution of total sales</CardDescription>
           </CardHeader>
           <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>City</TableHead>
-                  <TableHead className="text-center">Units Sold</TableHead>
-                  <TableHead className="text-center">Avg Discount (%)</TableHead>
-                  <TableHead className="text-center">Revenue (IDR)</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {areaSalesTableData.map((item, index) => (
-                  <TableRow key={index}>
-                    <TableCell className="font-medium">{item.city}</TableCell>
-                    <TableCell className="text-center">{item.unitsSold.toLocaleString()}</TableCell>
-                    <TableCell className="text-center">{item.avgDiscount}%</TableCell>
-                    <TableCell className="text-center">IDR {(item.revenue / 1000000).toFixed(0)}M</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+            <ResponsiveContainer width="100%" height={300}>
+              <PieChart>
+                <Pie
+                  data={salesChannelData}
+                  cx="50%"
+                  cy="50%"
+                  labelLine={false}
+                  label={({ name, value }) => `${name} ${value}%`}
+                  outerRadius={80}
+                  fill="#8884d8"
+                  dataKey="value"
+                >
+                  {salesChannelData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <RechartsTooltip />
+              </PieChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader>
+            <CardTitle>Sales by Subcategory</CardTitle>
+            <CardDescription>Subcategory distribution of total sales</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ResponsiveContainer width="100%" height={300}>
+              <PieChart>
+                <Pie
+                  data={salesCategoryData}
+                  cx="50%"
+                  cy="50%"
+                  labelLine={false}
+                  label={({ name, value }) => `${name} ${value}%`}
+                  outerRadius={80}
+                  fill="#8884d8"
+                  dataKey="value"
+                >
+                  {salesCategoryData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <RechartsTooltip />
+              </PieChart>
+            </ResponsiveContainer>
           </CardContent>
         </Card>
       </div>
@@ -598,10 +796,13 @@ const Dashboard = () => {
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="brand" />
               <YAxis />
-              <RechartsTooltip formatter={(value) => `$${(Number(value) / 1000).toFixed(0)}K`} />
+              <RechartsTooltip formatter={(value) => `IDR ${(Number(value) / 1000000).toFixed(1)}M`} />
               <Legend />
-              <Bar dataKey="astroSales" fill="#8884d8" name="Segari" />
-              <Bar dataKey="segariSales" fill="#82ca9d" name="Astro" />
+              <Bar dataKey="astroSales" fill="#8884d8" name="Astro" />
+              <Bar dataKey="segariSales" fill="#82ca9d" name="Segari" />
+              <Bar dataKey="alfagiftSales" fill="#ffc658" name="Alfagift" />
+              <Bar dataKey="klickIndomaretSales" fill="#ff7300" name="Klikindomaret" />
+              <Bar dataKey="mysuperindoSales" fill="#00ff00" name="MySuperIndo" />
             </BarChart>
           </ResponsiveContainer>
         </CardContent>
@@ -1594,7 +1795,7 @@ const Dashboard = () => {
               </h2>
               <p className="text-gray-600 mt-1">
                 {currentPage === 'overview' && 'Complete overview of your commerce analysis with key metrics and performance indicators'}
-                {currentPage === 'sales' && 'Detailed sales analysis across different areas and brands'}
+                {currentPage === 'sales' && 'Brand sales analysis with KPIs, channel breakdown, and performance metrics'}
                 {currentPage === 'inventory' && 'Stock movement tracking and inventory management insights'}
                 {currentPage === 'brands' && 'Comprehensive brand and product sales analysis'}
                 {currentPage === 'assortment' && 'Deep dive into SKU coverage and brand distribution'}
