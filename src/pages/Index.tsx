@@ -194,6 +194,56 @@ const discountSalesData = [
   { area: 'Makassar', withDiscount: 14600, withoutDiscount: 8900 },
 ];
 
+// New data for SKU availability by brand across channels
+const skuAvailabilityData = [
+  { 
+    brand: 'Ultramilk', 
+    skus: [
+      { name: 'Ultramilk Strawberry 250ml', astro: true, segari: true, klikindomaret: true, alfagift: true, mysuperindo: false },
+      { name: 'Ultramilk Chocolate 250ml', astro: true, segari: false, klikindomaret: true, alfagift: true, mysuperindo: true },
+      { name: 'Ultramilk Plain 1L', astro: true, segari: true, klikindomaret: false, alfagift: true, mysuperindo: true }
+    ]
+  },
+  { 
+    brand: 'Greenfields', 
+    skus: [
+      { name: 'Greenfields Fresh Milk 1L', astro: true, segari: true, klikindomaret: true, alfagift: false, mysuperindo: true },
+      { name: 'Greenfields Low Fat 500ml', astro: false, segari: true, klikindomaret: true, alfagift: true, mysuperindo: false }
+    ]
+  },
+  { 
+    brand: 'Diamond', 
+    skus: [
+      { name: 'Diamond Premium Tissue', astro: true, segari: true, klikindomaret: true, alfagift: true, mysuperindo: true },
+      { name: 'Diamond Soft Tissue', astro: true, segari: false, klikindomaret: false, alfagift: true, mysuperindo: true }
+    ]
+  },
+  { 
+    brand: 'Prochiz', 
+    skus: [
+      { name: 'Prochiz Cheese Spread', astro: true, segari: true, klikindomaret: true, alfagift: true, mysuperindo: false },
+      { name: 'Prochiz Cheddar Slice', astro: false, segari: true, klikindomaret: true, alfagift: false, mysuperindo: true }
+    ]
+  },
+  { 
+    brand: 'Mimi White', 
+    skus: [
+      { name: 'Mimi White Soft Tissue', astro: true, segari: true, klikindomaret: false, alfagift: true, mysuperindo: true },
+      { name: 'Mimi White Premium Pack', astro: true, segari: false, klikindomaret: true, alfagift: true, mysuperindo: false }
+    ]
+  }
+];
+
+// New data for number of SKUs with discount per brand (line chart)
+const skuDiscountByBrandData = [
+  { date: '20 May', ultraMilk: 12, prochiz: 8, greenfields: 6, diamond: 10, mimiWhite: 5 },
+  { date: '22 May', ultraMilk: 15, prochiz: 10, greenfields: 8, diamond: 12, mimiWhite: 7 },
+  { date: '24 May', ultraMilk: 18, prochiz: 12, greenfields: 10, diamond: 14, mimiWhite: 9 },
+  { date: '26 May', ultraMilk: 20, prochiz: 15, greenfields: 12, diamond: 16, mimiWhite: 11 },
+  { date: '28 May', ultraMilk: 17, prochiz: 13, greenfields: 9, diamond: 15, mimiWhite: 8 },
+  { date: '30 May', ultraMilk: 22, prochiz: 16, greenfields: 14, diamond: 18, mimiWhite: 12 },
+];
+
 const brandDiscountFrequency = [
   { brand: 'Ultra Milk', segari: 45, astro: 32, klickIndomaret: 28, alfagift: 35, uplift: 35 },
   { brand: 'Prochiz', segari: 38, astro: 42, klickIndomaret: 31, alfagift: 29, uplift: 42 },
@@ -736,38 +786,40 @@ const Dashboard = () => {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="col-span-2">
           <CardHeader>
             <CardTitle>SKU Sales by Channel</CardTitle>
             <CardDescription>SKU-level sales performance across different channels</CardDescription>
           </CardHeader>
           <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Sub Category</TableHead>
-                  <TableHead>SKU</TableHead>
-                  <TableHead className="text-center">Astro</TableHead>
-                  <TableHead className="text-center">Segari</TableHead>
-                  <TableHead className="text-center">Klik Indomaret</TableHead>
-                  <TableHead className="text-center">Superindo</TableHead>
-                  <TableHead className="text-center">Alfagift</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {skuSalesByChannelData.map((item, index) => (
-                  <TableRow key={index}>
-                    <TableCell className="font-medium">{item.subCategory}</TableCell>
-                    <TableCell>{item.sku}</TableCell>
-                    <TableCell className="text-center">{item.astro.toLocaleString()}</TableCell>
-                    <TableCell className="text-center">{item.segari.toLocaleString()}</TableCell>
-                    <TableCell className="text-center">{item.klickIndomaret.toLocaleString()}</TableCell>
-                    <TableCell className="text-center">{item.superindo.toLocaleString()}</TableCell>
-                    <TableCell className="text-center">{item.alfagift.toLocaleString()}</TableCell>
+            <div className="overflow-x-auto">
+              <Table className="w-full">
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="min-w-[120px]">Sub Category</TableHead>
+                    <TableHead className="min-w-[200px]">SKU</TableHead>
+                    <TableHead className="text-center min-w-[120px]">Astro</TableHead>
+                    <TableHead className="text-center min-w-[120px]">Segari</TableHead>
+                    <TableHead className="text-center min-w-[140px]">Klik Indomaret</TableHead>
+                    <TableHead className="text-center min-w-[120px]">Superindo</TableHead>
+                    <TableHead className="text-center min-w-[120px]">Alfagift</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody>
+                  {skuSalesByChannelData.map((item, index) => (
+                    <TableRow key={index}>
+                      <TableCell className="font-medium">{item.subCategory}</TableCell>
+                      <TableCell>{item.sku}</TableCell>
+                      <TableCell className="text-center">{item.astro.toLocaleString()}</TableCell>
+                      <TableCell className="text-center">{item.segari.toLocaleString()}</TableCell>
+                      <TableCell className="text-center">{item.klickIndomaret.toLocaleString()}</TableCell>
+                      <TableCell className="text-center">{item.superindo.toLocaleString()}</TableCell>
+                      <TableCell className="text-center">{item.alfagift.toLocaleString()}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
           </CardContent>
         </Card>
       </div>
@@ -1233,6 +1285,58 @@ const Dashboard = () => {
 
   const renderAssortmentAnalysis = () => (
     <div className="space-y-6">
+      <Card>
+        <CardHeader>
+          <CardTitle>SKU Availability by Brand</CardTitle>
+          <CardDescription>Channel availability for each SKU by brand with tick marks</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-6">
+            {skuAvailabilityData.map((brandData, brandIndex) => (
+              <div key={brandIndex} className="border rounded-lg p-4">
+                <h3 className="font-semibold text-lg mb-4">{brandData.brand}</h3>
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="min-w-[200px]">SKU Name</TableHead>
+                        <TableHead className="text-center min-w-[100px]">Astro</TableHead>
+                        <TableHead className="text-center min-w-[100px]">Segari</TableHead>
+                        <TableHead className="text-center min-w-[140px]">Klikindomaret</TableHead>
+                        <TableHead className="text-center min-w-[100px]">Alfagift</TableHead>
+                        <TableHead className="text-center min-w-[120px]">MySuperIndo</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {brandData.skus.map((sku, skuIndex) => (
+                        <TableRow key={skuIndex}>
+                          <TableCell className="font-medium">{sku.name}</TableCell>
+                          <TableCell className="text-center">
+                            {sku.astro ? <span className="text-green-600 text-xl">✓</span> : <span className="text-red-500 text-xl">✗</span>}
+                          </TableCell>
+                          <TableCell className="text-center">
+                            {sku.segari ? <span className="text-green-600 text-xl">✓</span> : <span className="text-red-500 text-xl">✗</span>}
+                          </TableCell>
+                          <TableCell className="text-center">
+                            {sku.klikindomaret ? <span className="text-green-600 text-xl">✓</span> : <span className="text-red-500 text-xl">✗</span>}
+                          </TableCell>
+                          <TableCell className="text-center">
+                            {sku.alfagift ? <span className="text-green-600 text-xl">✓</span> : <span className="text-red-500 text-xl">✗</span>}
+                          </TableCell>
+                          <TableCell className="text-center">
+                            {sku.mysuperindo ? <span className="text-green-600 text-xl">✓</span> : <span className="text-red-500 text-xl">✗</span>}
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
@@ -1581,19 +1685,22 @@ const Dashboard = () => {
 
       <Card>
         <CardHeader>
-          <CardTitle>Daily Sales: Discount vs No Discount</CardTitle>
-          <CardDescription>Daily comparison of sales performance with and without discounts</CardDescription>
+          <CardTitle>Number of SKUs with Discount per Brand</CardTitle>
+          <CardDescription>Daily tracking of discounted SKUs by brand</CardDescription>
         </CardHeader>
         <CardContent>
           <ResponsiveContainer width="100%" height={300}>
-            <LineChart data={dailyDiscountData}>
+            <LineChart data={skuDiscountByBrandData}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="date" />
               <YAxis />
               <RechartsTooltip />
               <Legend />
-              <Line type="monotone" dataKey="withDiscount" stroke="#82ca9d" strokeWidth={2} name="With Discount" />
-              <Line type="monotone" dataKey="noDiscount" stroke="#8884d8" strokeWidth={2} name="No Discount" />
+              <Line type="monotone" dataKey="ultraMilk" stroke="#8884d8" strokeWidth={2} name="Ultra Milk" />
+              <Line type="monotone" dataKey="prochiz" stroke="#82ca9d" strokeWidth={2} name="Prochiz" />
+              <Line type="monotone" dataKey="greenfields" stroke="#ffc658" strokeWidth={2} name="Greenfields" />
+              <Line type="monotone" dataKey="diamond" stroke="#ff7300" strokeWidth={2} name="Diamond" />
+              <Line type="monotone" dataKey="mimiWhite" stroke="#00ff00" strokeWidth={2} name="Mimi White" />
             </LineChart>
           </ResponsiveContainer>
         </CardContent>
