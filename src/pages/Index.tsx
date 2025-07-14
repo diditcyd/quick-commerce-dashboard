@@ -307,7 +307,7 @@ const Dashboard = () => {
     { id: 'overview', label: 'Overview', icon: BarChart3 },
     { id: 'sales', label: 'Brand Sales', icon: Activity },
     { id: 'inventory', label: 'Stock Movement', icon: Package },
-    { id: 'brands', label: 'Brand & Product', icon: TrendingUp },
+    { id: 'brands', label: 'Region Analysis', icon: TrendingUp },
     { id: 'assortment', label: 'Assortment Analysis', icon: Package },
     { id: 'category', label: 'Category Performance', icon: PieChartIcon },
     { id: 'pricing', label: 'Price Analysis', icon: DollarSign },
@@ -682,33 +682,6 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
-            <CardTitle>Top Brand Sales</CardTitle>
-            <CardDescription>Leading brands by market share and growth</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {topBrandSales.map((brand, index) => (
-                <div key={index} className="flex items-center justify-between p-3 border rounded-lg">
-                  <div className="flex-1">
-                    <div className="font-medium">{brand.brand}</div>
-                    <div className="text-sm text-muted-foreground">
-                      Market Share: {brand.marketShare}%
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <div className="font-bold">${(brand.salesValue / 1000000).toFixed(1)}M</div>
-                    <Badge variant={brand.growth > 0 ? "default" : "destructive"}>
-                      {brand.growth > 0 ? "+" : ""}{brand.growth}%
-                    </Badge>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
             <CardTitle>Sales by Channel</CardTitle>
             <CardDescription>Channel distribution of total sales</CardDescription>
           </CardHeader>
@@ -760,6 +733,41 @@ const Dashboard = () => {
                 <RechartsTooltip />
               </PieChart>
             </ResponsiveContainer>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>SKU Sales by Channel</CardTitle>
+            <CardDescription>SKU-level sales performance across different channels</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Sub Category</TableHead>
+                  <TableHead>SKU</TableHead>
+                  <TableHead className="text-center">Astro</TableHead>
+                  <TableHead className="text-center">Segari</TableHead>
+                  <TableHead className="text-center">Klik Indomaret</TableHead>
+                  <TableHead className="text-center">Superindo</TableHead>
+                  <TableHead className="text-center">Alfagift</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {skuSalesByChannelData.map((item, index) => (
+                  <TableRow key={index}>
+                    <TableCell className="font-medium">{item.subCategory}</TableCell>
+                    <TableCell>{item.sku}</TableCell>
+                    <TableCell className="text-center">{item.astro.toLocaleString()}</TableCell>
+                    <TableCell className="text-center">{item.segari.toLocaleString()}</TableCell>
+                    <TableCell className="text-center">{item.klickIndomaret.toLocaleString()}</TableCell>
+                    <TableCell className="text-center">{item.superindo.toLocaleString()}</TableCell>
+                    <TableCell className="text-center">{item.alfagift.toLocaleString()}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </CardContent>
         </Card>
       </div>
@@ -948,6 +956,39 @@ const Dashboard = () => {
 
       <Card>
         <CardHeader>
+          <CardTitle>SKU Per Brand by Channel</CardTitle>
+          <CardDescription>Number of SKUs per brand across channels</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Brand</TableHead>
+                <TableHead className="text-center">Astro</TableHead>
+                <TableHead className="text-center">Segari</TableHead>
+                <TableHead className="text-center">Klik Indomaret</TableHead>
+                <TableHead className="text-center">Superindo</TableHead>
+                <TableHead className="text-center">Alfagift</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {skuPerBrandTableData.map((item, index) => (
+                <TableRow key={index}>
+                  <TableCell className="font-medium">{item.brand}</TableCell>
+                  <TableCell className="text-center">{item.astro.toLocaleString()}</TableCell>
+                  <TableCell className="text-center">{item.segari.toLocaleString()}</TableCell>
+                  <TableCell className="text-center">{item.klickIndomaret.toLocaleString()}</TableCell>
+                  <TableCell className="text-center">{item.superindo.toLocaleString()}</TableCell>
+                  <TableCell className="text-center">{item.alfagift.toLocaleString()}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
           <CardTitle>Restock Details</CardTitle>
           <CardDescription>Item-level restock analysis</CardDescription>
         </CardHeader>
@@ -1042,97 +1083,93 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Total Sales</CardTitle>
+            <DollarSign className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">IDR 17.04B</div>
+            <p className="text-xs text-green-600">+12.3% from last month</p>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Total Units Sold</CardTitle>
+            <ShoppingCart className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">391,853</div>
+            <p className="text-xs text-green-600">+8.7% from last month</p>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total SKU</CardTitle>
             <Package className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">29.9K</div>
+            <div className="text-2xl font-bold">29,940</div>
             <p className="text-xs text-muted-foreground">Active products</p>
           </CardContent>
         </Card>
         
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Brand</CardTitle>
-            <TrendingUp className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium">Top Region by Sales</CardTitle>
+            <MapPin className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">12,234</div>
-            <p className="text-xs text-muted-foreground">Unique brands</p>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">AVG SKU in Channel</CardTitle>
-            <Target className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">2,909</div>
-            <p className="text-xs text-muted-foreground">Per channel</p>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">AVG SKU Per Brand</CardTitle>
-            <BarChart3 className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">2,879</div>
-            <p className="text-xs text-muted-foreground">Per brand average</p>
+            <div className="text-2xl font-bold">Jakarta Utara</div>
+            <p className="text-xs text-green-600">51,339 units sold</p>
           </CardContent>
         </Card>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>Sales by Channel</CardTitle>
-          <CardDescription>Channel performance across different sales platforms</CardDescription>
+          <CardTitle>Average Daily Sales per Region</CardTitle>
+          <CardDescription>Daily sales performance across different regions</CardDescription>
         </CardHeader>
         <CardContent>
           <ResponsiveContainer width="100%" height={300}>
-            <PieChart>
-              <Pie
-                data={salesChannelData}
-                cx="50%"
-                cy="50%"
-                labelLine={false}
-                label={({ name, value }) => `${name} ${value}%`}
-                outerRadius={100}
-                fill="#8884d8"
-                dataKey="value"
-              >
-                {salesChannelData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} />
-                ))}
-              </Pie>
-              <RechartsTooltip formatter={(value) => `${value}%`} />
-              <Legend />
-            </PieChart>
+            <BarChart data={[
+              { region: 'Jakarta Utara', avgDailySales: 2567 },
+              { region: 'Jakarta Barat', avgDailySales: 1377 },
+              { region: 'Bekasi', avgDailySales: 1327 },
+              { region: 'Depok', avgDailySales: 724 },
+              { region: 'Bandung', avgDailySales: 444 },
+            ]}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="region" />
+              <YAxis />
+              <RechartsTooltip formatter={(value) => `${value} units/day`} />
+              <Bar dataKey="avgDailySales" fill="#8884d8" name="Avg Daily Sales" />
+            </BarChart>
           </ResponsiveContainer>
         </CardContent>
       </Card>
 
       <Card>
         <CardHeader>
-          <CardTitle>Daily Brand Sales</CardTitle>
-          <CardDescription>Sales tracking of top brands over time</CardDescription>
+          <CardTitle>Stock Coverage per Region</CardTitle>
+          <CardDescription>Stock coverage analysis across different regions</CardDescription>
         </CardHeader>
         <CardContent>
-          <ResponsiveContainer width="100%" height={400}>
-            <AreaChart data={dailySalesByBrand}>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={[
+              { region: 'Jakarta Utara', stockCoverage: 15.2 },
+              { region: 'Jakarta Barat', stockCoverage: 22.8 },
+              { region: 'Bekasi', stockCoverage: 18.5 },
+              { region: 'Depok', stockCoverage: 28.1 },
+              { region: 'Bandung', stockCoverage: 35.7 },
+            ]}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="date" />
+              <XAxis dataKey="region" />
               <YAxis />
-              <RechartsTooltip />
-              <Legend />
-              <Area type="monotone" dataKey="ultraMilk" stackId="1" stroke="#8884d8" fill="#8884d8" name="Ultra Milk" />
-              <Area type="monotone" dataKey="prochiz" stackId="1" stroke="#82ca9d" fill="#82ca9d" name="Prochiz" />
-              <Area type="monotone" dataKey="greenfields" stackId="1" stroke="#ffc658" fill="#ffc658" name="Greenfields" />
-              <Area type="monotone" dataKey="diamond" stackId="1" stroke="#ff7300" fill="#ff7300" name="Diamond" />
-              <Area type="monotone" dataKey="mimiWhite" stackId="1" stroke="#00ff00" fill="#00ff00" name="Mimi White" />
-            </AreaChart>
+              <RechartsTooltip formatter={(value) => `${value} days`} />
+              <Bar dataKey="stockCoverage" fill="#82ca9d" name="Stock Coverage (Days)" />
+            </BarChart>
           </ResponsiveContainer>
         </CardContent>
       </Card>
@@ -1191,73 +1228,6 @@ const Dashboard = () => {
         </Card>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>SKU Per Brand by Channel</CardTitle>
-          <CardDescription>Number of SKUs per brand across channels</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Brand</TableHead>
-                <TableHead className="text-center">Astro</TableHead>
-                <TableHead className="text-center">Segari</TableHead>
-                <TableHead className="text-center">Klik Indomaret</TableHead>
-                <TableHead className="text-center">Superindo</TableHead>
-                <TableHead className="text-center">Alfagift</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {skuPerBrandTableData.map((item, index) => (
-                <TableRow key={index}>
-                  <TableCell className="font-medium">{item.brand}</TableCell>
-                  <TableCell className="text-center">{item.astro.toLocaleString()}</TableCell>
-                  <TableCell className="text-center">{item.segari.toLocaleString()}</TableCell>
-                  <TableCell className="text-center">{item.klickIndomaret.toLocaleString()}</TableCell>
-                  <TableCell className="text-center">{item.superindo.toLocaleString()}</TableCell>
-                  <TableCell className="text-center">{item.alfagift.toLocaleString()}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>SKU Sales by Channel</CardTitle>
-          <CardDescription>SKU-level sales performance across different channels</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Sub Category</TableHead>
-                <TableHead>SKU</TableHead>
-                <TableHead className="text-center">Astro</TableHead>
-                <TableHead className="text-center">Segari</TableHead>
-                <TableHead className="text-center">Klik Indomaret</TableHead>
-                <TableHead className="text-center">Superindo</TableHead>
-                <TableHead className="text-center">Alfagift</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {skuSalesByChannelData.map((item, index) => (
-                <TableRow key={index}>
-                  <TableCell className="font-medium">{item.subCategory}</TableCell>
-                  <TableCell>{item.sku}</TableCell>
-                  <TableCell className="text-center">{item.astro.toLocaleString()}</TableCell>
-                  <TableCell className="text-center">{item.segari.toLocaleString()}</TableCell>
-                  <TableCell className="text-center">{item.klickIndomaret.toLocaleString()}</TableCell>
-                  <TableCell className="text-center">{item.superindo.toLocaleString()}</TableCell>
-                  <TableCell className="text-center">{item.alfagift.toLocaleString()}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
     </div>
   );
 
