@@ -185,13 +185,39 @@ const skuCoverageData = [
   { category: 'Tisu', segari: 92, astro: 68, klickIndomaret: 89, alfagift: 95, superindo: 45 },
 ];
 
-// New data for promotion analysis
-const discountSalesData = [
-  { area: 'Jakarta', withDiscount: 18500, withoutDiscount: 12300 },
-  { area: 'Surabaya', withDiscount: 15200, withoutDiscount: 11800 },
-  { area: 'Bandung', withDiscount: 16800, withoutDiscount: 10500 },
-  { area: 'Medan', withDiscount: 13400, withoutDiscount: 9200 },
-  { area: 'Makassar', withDiscount: 14600, withoutDiscount: 8900 },
+// New data for promotion analysis - changed to days
+const discountDaysData = [
+  { brand: 'Greenfields', withDiscount: 25, withoutDiscount: 5 },
+  { brand: 'Ultramilk', withDiscount: 22, withoutDiscount: 8 },
+  { brand: 'Diamond', withDiscount: 18, withoutDiscount: 12 },
+  { brand: 'Prochiz', withDiscount: 20, withoutDiscount: 10 },
+  { brand: 'Mimi White', withDiscount: 15, withoutDiscount: 15 },
+];
+
+// New data for SKU promotion coverage
+const skuPromotionCoverageData = [
+  { name: 'With Discount', value: 45, color: '#82ca9d' },
+  { name: 'Without Discount', value: 32, color: '#8884d8' }
+];
+
+// New data for price trendline
+const priceHistoryData = [
+  { date: '1 May', astro: 125, segari: 118, klikindomaret: 122, alfagift: 120, mysuperindo: 124 },
+  { date: '5 May', astro: 127, segari: 120, klikindomaret: 124, alfagift: 122, mysuperindo: 126 },
+  { date: '10 May', astro: 130, segari: 122, klikindomaret: 126, alfagift: 124, mysuperindo: 128 },
+  { date: '15 May', astro: 128, segari: 119, klikindomaret: 123, alfagift: 121, mysuperindo: 125 },
+  { date: '20 May', astro: 132, segari: 125, klikindomaret: 128, alfagift: 126, mysuperindo: 130 },
+  { date: '25 May', astro: 129, segari: 121, klikindomaret: 125, alfagift: 123, mysuperindo: 127 },
+  { date: '30 May', astro: 131, segari: 124, klikindomaret: 127, alfagift: 125, mysuperindo: 129 },
+];
+
+// SKU options for price analysis dropdown
+const skuOptions = [
+  { value: 'sku001', label: 'Greenfields UHT Milk 1L' },
+  { value: 'sku002', label: 'Ultramilk Full Cream 1L' },
+  { value: 'sku003', label: 'Diamond Ice Cream 500ml' },
+  { value: 'sku004', label: 'Prochiz Cheese 200g' },
+  { value: 'sku005', label: 'Mimi White Tissue 2-ply' },
 ];
 
 // New data for SKU availability by brand across channels
@@ -352,6 +378,7 @@ const Dashboard = () => {
   const [currentPage, setCurrentPage] = useState('overview');
   const [selectedBrandFilter, setSelectedBrandFilter] = useState('all');
   const [dailySalesView, setDailySalesView] = useState('category'); // 'category', 'brand', or 'channel'
+  const [selectedSku, setSelectedSku] = useState('sku001');
 
   const navigationItems = [
     { id: 'overview', label: 'Overview', icon: BarChart3 },
@@ -1626,6 +1653,44 @@ const Dashboard = () => {
           </div>
         </CardContent>
       </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Historical Price Trend</CardTitle>
+          <CardDescription>Track price changes across all channels for selected SKU</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="mb-4">
+            <label className="block text-sm font-medium mb-2">Select SKU:</label>
+            <Select value={selectedSku} onValueChange={setSelectedSku}>
+              <SelectTrigger className="w-[280px]">
+                <SelectValue placeholder="Select a SKU" />
+              </SelectTrigger>
+              <SelectContent>
+                {skuOptions.map((sku) => (
+                  <SelectItem key={sku.value} value={sku.value}>
+                    {sku.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <ResponsiveContainer width="100%" height={400}>
+            <LineChart data={priceHistoryData}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="date" />
+              <YAxis />
+              <RechartsTooltip formatter={(value) => `IDR ${Number(value).toLocaleString()}`} />
+              <Legend />
+              <Line type="monotone" dataKey="astro" stroke="#8884d8" strokeWidth={2} name="Astro" />
+              <Line type="monotone" dataKey="segari" stroke="#82ca9d" strokeWidth={2} name="Segari" />
+              <Line type="monotone" dataKey="klikindomaret" stroke="#ffc658" strokeWidth={2} name="Klik Indomaret" />
+              <Line type="monotone" dataKey="alfagift" stroke="#ff7300" strokeWidth={2} name="Alfagift" />
+              <Line type="monotone" dataKey="mysuperindo" stroke="#00ff00" strokeWidth={2} name="MySuperIndo" />
+            </LineChart>
+          </ResponsiveContainer>
+        </CardContent>
+      </Card>
     </div>
   );
 
@@ -1634,16 +1699,16 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
-            <CardTitle>AVG Daily Sales: Discount vs No Discount</CardTitle>
-            <CardDescription>Sales comparison with and without promotions</CardDescription>
+            <CardTitle>Number of Days: With Discount vs Without Discount</CardTitle>
+            <CardDescription>Days comparison with and without promotions by brand</CardDescription>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={discountSalesData}>
+              <BarChart data={discountDaysData}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="area" />
+                <XAxis dataKey="brand" />
                 <YAxis />
-                <RechartsTooltip formatter={(value) => `${(Number(value) / 1000).toFixed(0)}K`} />
+                <RechartsTooltip />
                 <Legend />
                 <Bar dataKey="withDiscount" fill="#82ca9d" name="With Discount" />
                 <Bar dataKey="withoutDiscount" fill="#8884d8" name="Without Discount" />
@@ -1655,16 +1720,13 @@ const Dashboard = () => {
         <Card>
           <CardHeader>
             <CardTitle>Promotion Coverage</CardTitle>
-            <CardDescription>Areas with active promotions</CardDescription>
+            <CardDescription>Number of SKUs with and without discount</CardDescription>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie
-                  data={[
-                    { name: 'With Promotion', value: 3, color: '#82ca9d' },
-                    { name: 'Without Promotion', value: 2, color: '#8884d8' }
-                  ]}
+                  data={skuPromotionCoverageData}
                   cx="50%"
                   cy="50%"
                   labelLine={false}
