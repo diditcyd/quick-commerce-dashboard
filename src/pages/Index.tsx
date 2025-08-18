@@ -64,11 +64,11 @@ const priceComparisonData = [
 ];
 
 const topBrandsData = [
-  { brand: 'Greenfields', astroSales: 2500000, segariSales: 1800000, alfagiftSales: 1200000, klickIndomaretSales: 1600000, mysuperindoSales: 900000 },
-  { brand: 'Ultramilk', astroSales: 3200000, segariSales: 2100000, alfagiftSales: 1800000, klickIndomaretSales: 2200000, mysuperindoSales: 1300000 },
-  { brand: 'Diamond', astroSales: 1800000, segariSales: 2200000, alfagiftSales: 1500000, klickIndomaretSales: 1900000, mysuperindoSales: 1100000 },
-  { brand: 'Prochiz', astroSales: 1500000, segariSales: 1600000, alfagiftSales: 1300000, klickIndomaretSales: 1400000, mysuperindoSales: 800000 },
-  { brand: 'Mimi White', astroSales: 1200000, segariSales: 1400000, alfagiftSales: 1000000, klickIndomaretSales: 1100000, mysuperindoSales: 700000 },
+  { brand: 'Greenfields', astroSales: 2500000, segariSales: 1800000, alfagiftSales: 1200000, klickIndomaretSales: 1600000, mysuperindoSales: 900000, sayurboxSales: 1100000 },
+  { brand: 'Ultramilk', astroSales: 3200000, segariSales: 2100000, alfagiftSales: 1800000, klickIndomaretSales: 2200000, mysuperindoSales: 1300000, sayurboxSales: 1500000 },
+  { brand: 'Diamond', astroSales: 1800000, segariSales: 2200000, alfagiftSales: 1500000, klickIndomaretSales: 1900000, mysuperindoSales: 1100000, sayurboxSales: 1200000 },
+  { brand: 'Prochiz', astroSales: 1500000, segariSales: 1600000, alfagiftSales: 1300000, klickIndomaretSales: 1400000, mysuperindoSales: 800000, sayurboxSales: 950000 },
+  { brand: 'Mimi White', astroSales: 1200000, segariSales: 1400000, alfagiftSales: 1000000, klickIndomaretSales: 1100000, mysuperindoSales: 700000, sayurboxSales: 850000 },
 ];
 
 const inventoryAreaData = [
@@ -103,6 +103,7 @@ const salesChannelData = [
   { name: 'Klik Indomaret', value: 20, color: '#FFBB28' },
   { name: 'Alfagift', value: 18, color: '#FF8042' },
   { name: 'SuperIndo', value: 15, color: '#8884D8' },
+  { name: 'Sayurbox', value: 12, color: '#FF6B6B' },
 ];
 
 const salesCategoryData = [
@@ -146,11 +147,11 @@ const dailySalesByBrand = [
 ];
 
 const dailySalesByChannel = [
-  { date: '22 May', segari: 800, astro: 650, klickIndomaret: 600, alfagift: 500, superindo: 450, mysuperindo: 300 },
-  { date: '24 May', segari: 850, astro: 700, klickIndomaret: 650, alfagift: 550, superindo: 480, mysuperindo: 320 },
-  { date: '26 May', segari: 900, astro: 750, klickIndomaret: 700, alfagift: 600, superindo: 500, mysuperindo: 350 },
-  { date: '28 May', segari: 950, astro: 800, klickIndomaret: 750, alfagift: 650, superindo: 520, mysuperindo: 380 },
-  { date: '30 May', segari: 1000, astro: 850, klickIndomaret: 800, alfagift: 700, superindo: 550, mysuperindo: 400 },
+  { date: '22 May', segari: 800, astro: 650, klickIndomaret: 600, alfagift: 500, superindo: 450, mysuperindo: 300, sayurbox: 380 },
+  { date: '24 May', segari: 850, astro: 700, klickIndomaret: 650, alfagift: 550, superindo: 480, mysuperindo: 320, sayurbox: 420 },
+  { date: '26 May', segari: 900, astro: 750, klickIndomaret: 700, alfagift: 600, superindo: 500, mysuperindo: 350, sayurbox: 450 },
+  { date: '28 May', segari: 950, astro: 800, klickIndomaret: 750, alfagift: 650, superindo: 520, mysuperindo: 380, sayurbox: 480 },
+  { date: '30 May', segari: 1000, astro: 850, klickIndomaret: 800, alfagift: 700, superindo: 550, mysuperindo: 400, sayurbox: 520 },
 ];
 
 const topBrandSales = [
@@ -181,8 +182,8 @@ const areaSalesTableData = [
 
 // Updated SKU Coverage data to swap axes
 const skuCoverageData = [
-  { category: 'Susu', segari: 85, astro: 72, klickIndomaret: 78, alfagift: 65, superindo: 88 },
-  { category: 'Tisu', segari: 92, astro: 68, klickIndomaret: 89, alfagift: 95, superindo: 45 },
+  { category: 'Susu', segari: 85, astro: 72, klickIndomaret: 78, alfagift: 65, superindo: 88, sayurbox: 80 },
+  { category: 'Tisu', segari: 92, astro: 68, klickIndomaret: 89, alfagift: 95, superindo: 45, sayurbox: 75 },
 ];
 
 // New data for promotion analysis - changed to days
@@ -202,13 +203,13 @@ const skuPromotionCoverageData = [
 
 // New data for price trendline
 const priceHistoryData = [
-  { date: '1 May', astro: 125, segari: 118, klikindomaret: 122, alfagift: 120, mysuperindo: 124 },
-  { date: '5 May', astro: 127, segari: 120, klikindomaret: 124, alfagift: 122, mysuperindo: 126 },
-  { date: '10 May', astro: 130, segari: 122, klikindomaret: 126, alfagift: 124, mysuperindo: 128 },
-  { date: '15 May', astro: 128, segari: 119, klikindomaret: 123, alfagift: 121, mysuperindo: 125 },
-  { date: '20 May', astro: 132, segari: 125, klikindomaret: 128, alfagift: 126, mysuperindo: 130 },
-  { date: '25 May', astro: 129, segari: 121, klikindomaret: 125, alfagift: 123, mysuperindo: 127 },
-  { date: '30 May', astro: 131, segari: 124, klikindomaret: 127, alfagift: 125, mysuperindo: 129 },
+  { date: '1 May', astro: 125, segari: 118, klikindomaret: 122, alfagift: 120, mysuperindo: 124, sayurbox: 121 },
+  { date: '5 May', astro: 127, segari: 120, klikindomaret: 124, alfagift: 122, mysuperindo: 126, sayurbox: 123 },
+  { date: '10 May', astro: 130, segari: 122, klikindomaret: 126, alfagift: 124, mysuperindo: 128, sayurbox: 125 },
+  { date: '15 May', astro: 128, segari: 119, klikindomaret: 123, alfagift: 121, mysuperindo: 125, sayurbox: 122 },
+  { date: '20 May', astro: 132, segari: 125, klikindomaret: 128, alfagift: 126, mysuperindo: 130, sayurbox: 127 },
+  { date: '25 May', astro: 129, segari: 121, klikindomaret: 125, alfagift: 123, mysuperindo: 127, sayurbox: 124 },
+  { date: '30 May', astro: 131, segari: 124, klikindomaret: 127, alfagift: 125, mysuperindo: 129, sayurbox: 126 },
 ];
 
 // SKU options for price analysis dropdown
@@ -225,37 +226,37 @@ const skuAvailabilityData = [
   { 
     brand: 'Ultramilk', 
     skus: [
-      { name: 'Ultramilk Strawberry 250ml', astro: true, segari: true, klikindomaret: true, alfagift: true, mysuperindo: false },
-      { name: 'Ultramilk Chocolate 250ml', astro: true, segari: false, klikindomaret: true, alfagift: true, mysuperindo: true },
-      { name: 'Ultramilk Plain 1L', astro: true, segari: true, klikindomaret: false, alfagift: true, mysuperindo: true }
+      { name: 'Ultramilk Strawberry 250ml', astro: true, segari: true, klikindomaret: true, alfagift: true, mysuperindo: false, sayurbox: true },
+      { name: 'Ultramilk Chocolate 250ml', astro: true, segari: false, klikindomaret: true, alfagift: true, mysuperindo: true, sayurbox: false },
+      { name: 'Ultramilk Plain 1L', astro: true, segari: true, klikindomaret: false, alfagift: true, mysuperindo: true, sayurbox: true }
     ]
   },
   { 
     brand: 'Greenfields', 
     skus: [
-      { name: 'Greenfields Fresh Milk 1L', astro: true, segari: true, klikindomaret: true, alfagift: false, mysuperindo: true },
-      { name: 'Greenfields Low Fat 500ml', astro: false, segari: true, klikindomaret: true, alfagift: true, mysuperindo: false }
+      { name: 'Greenfields Fresh Milk 1L', astro: true, segari: true, klikindomaret: true, alfagift: false, mysuperindo: true, sayurbox: true },
+      { name: 'Greenfields Low Fat 500ml', astro: false, segari: true, klikindomaret: true, alfagift: true, mysuperindo: false, sayurbox: false }
     ]
   },
   { 
     brand: 'Diamond', 
     skus: [
-      { name: 'Diamond Premium Tissue', astro: true, segari: true, klikindomaret: true, alfagift: true, mysuperindo: true },
-      { name: 'Diamond Soft Tissue', astro: true, segari: false, klikindomaret: false, alfagift: true, mysuperindo: true }
+      { name: 'Diamond Premium Tissue', astro: true, segari: true, klikindomaret: true, alfagift: true, mysuperindo: true, sayurbox: true },
+      { name: 'Diamond Soft Tissue', astro: true, segari: false, klikindomaret: false, alfagift: true, mysuperindo: true, sayurbox: false }
     ]
   },
   { 
     brand: 'Prochiz', 
     skus: [
-      { name: 'Prochiz Cheese Spread', astro: true, segari: true, klikindomaret: true, alfagift: true, mysuperindo: false },
-      { name: 'Prochiz Cheddar Slice', astro: false, segari: true, klikindomaret: true, alfagift: false, mysuperindo: true }
+      { name: 'Prochiz Cheese Spread', astro: true, segari: true, klikindomaret: true, alfagift: true, mysuperindo: false, sayurbox: true },
+      { name: 'Prochiz Cheddar Slice', astro: false, segari: true, klikindomaret: true, alfagift: false, mysuperindo: true, sayurbox: false }
     ]
   },
   { 
     brand: 'Mimi White', 
     skus: [
-      { name: 'Mimi White Soft Tissue', astro: true, segari: true, klikindomaret: false, alfagift: true, mysuperindo: true },
-      { name: 'Mimi White Premium Pack', astro: true, segari: false, klikindomaret: true, alfagift: true, mysuperindo: false }
+      { name: 'Mimi White Soft Tissue', astro: true, segari: true, klikindomaret: false, alfagift: true, mysuperindo: true, sayurbox: true },
+      { name: 'Mimi White Premium Pack', astro: true, segari: false, klikindomaret: true, alfagift: true, mysuperindo: false, sayurbox: false }
     ]
   }
 ];
@@ -271,10 +272,10 @@ const skuDiscountByBrandData = [
 ];
 
 const brandDiscountFrequency = [
-  { brand: 'Ultra Milk', segari: 45, astro: 32, klickIndomaret: 28, alfagift: 35, uplift: 35 },
-  { brand: 'Prochiz', segari: 38, astro: 42, klickIndomaret: 31, alfagift: 29, uplift: 42 },
-  { brand: 'Greenfields', segari: 52, astro: 28, klickIndomaret: 35, alfagift: 41, uplift: 28 },
-  { brand: 'Diamond', segari: 29, astro: 35, klickIndomaret: 42, alfagift: 38, uplift: 31 },
+  { brand: 'Ultra Milk', segari: 45, astro: 32, klickIndomaret: 28, alfagift: 35, sayurbox: 38, uplift: 35 },
+  { brand: 'Prochiz', segari: 38, astro: 42, klickIndomaret: 31, alfagift: 29, sayurbox: 35, uplift: 42 },
+  { brand: 'Greenfields', segari: 52, astro: 28, klickIndomaret: 35, alfagift: 41, sayurbox: 33, uplift: 28 },
+  { brand: 'Diamond', segari: 29, astro: 35, klickIndomaret: 42, alfagift: 38, sayurbox: 31, uplift: 31 },
 ];
 
 // New data for Stock Movement table - updated with average days
@@ -288,20 +289,20 @@ const restockTableData = [
 
 // New data for Brand & Product table
 const skuPerBrandTableData = [
-  { brand: 'Ultramilk', astro: 2899, segari: 457, klickIndomaret: 897, superindo: 278, alfagift: 312 },
-  { brand: 'Greenfields', astro: 2263, segari: 380, klickIndomaret: 413, superindo: 168, alfagift: 245 },
-  { brand: 'Diamond', astro: 1573, segari: 344, klickIndomaret: 474, superindo: 179, alfagift: 198 },
-  { brand: 'Prochiz', astro: 1754, segari: 210, klickIndomaret: 368, superindo: 205, alfagift: 287 },
-  { brand: 'Mimi White', astro: 1234, segari: 289, klickIndomaret: 345, superindo: 156, alfagift: 223 },
+  { brand: 'Ultramilk', astro: 2899, segari: 457, klickIndomaret: 897, superindo: 278, alfagift: 312, sayurbox: 425 },
+  { brand: 'Greenfields', astro: 2263, segari: 380, klickIndomaret: 413, superindo: 168, alfagift: 245, sayurbox: 320 },
+  { brand: 'Diamond', astro: 1573, segari: 344, klickIndomaret: 474, superindo: 179, alfagift: 198, sayurbox: 285 },
+  { brand: 'Prochiz', astro: 1754, segari: 210, klickIndomaret: 368, superindo: 205, alfagift: 287, sayurbox: 240 },
+  { brand: 'Mimi White', astro: 1234, segari: 289, klickIndomaret: 345, superindo: 156, alfagift: 223, sayurbox: 195 },
 ];
 
 // New data for SKU Sales by Channel table
 const skuSalesByChannelData = [
-  { subCategory: 'Susu', sku: 'Ultramilk Strawberry 250ml', astro: 2899, segari: 457, klickIndomaret: 897, superindo: 278, alfagift: 312 },
-  { subCategory: 'Susu', sku: 'Greenfields Fresh Milk 1L', astro: 2263, segari: 380, klickIndomaret: 413, superindo: 168, alfagift: 245 },
-  { subCategory: 'Tisu', sku: 'Diamond Premium Tissue', astro: 1573, segari: 344, klickIndomaret: 474, superindo: 179, alfagift: 198 },
-  { subCategory: 'Susu', sku: 'Prochiz Cheese Spread', astro: 1754, segari: 210, klickIndomaret: 368, superindo: 205, alfagift: 287 },
-  { subCategory: 'Tisu', sku: 'Mimi White Soft Tissue', astro: 1234, segari: 289, klickIndomaret: 345, superindo: 156, alfagift: 223 },
+  { subCategory: 'Susu', sku: 'Ultramilk Strawberry 250ml', astro: 2899, segari: 457, klickIndomaret: 897, superindo: 278, alfagift: 312, sayurbox: 425 },
+  { subCategory: 'Susu', sku: 'Greenfields Fresh Milk 1L', astro: 2263, segari: 380, klickIndomaret: 413, superindo: 168, alfagift: 245, sayurbox: 320 },
+  { subCategory: 'Tisu', sku: 'Diamond Premium Tissue', astro: 1573, segari: 344, klickIndomaret: 474, superindo: 179, alfagift: 198, sayurbox: 285 },
+  { subCategory: 'Susu', sku: 'Prochiz Cheese Spread', astro: 1754, segari: 210, klickIndomaret: 368, superindo: 205, alfagift: 287, sayurbox: 240 },
+  { subCategory: 'Tisu', sku: 'Mimi White Soft Tissue', astro: 1234, segari: 289, klickIndomaret: 345, superindo: 156, alfagift: 223, sayurbox: 195 },
 ];
 
 // New data for Category Distribution by Channel
@@ -311,16 +312,17 @@ const categoryByChannelData = [
   { channel: 'Klik Indomaret', susu: 72, tisu: 28 },
   { channel: 'Alfagift', susu: 65, tisu: 35 },
   { channel: 'SuperIndo', susu: 70, tisu: 30 },
+  { channel: 'Sayurbox', susu: 73, tisu: 27 },
 ];
 
 // New data for SKU Coverage Overtime
 const skuCoverageOvertimeData = [
-  { month: 'Jan', totalSKU: 12000, segari: 8500, astro: 7200, klickIndomaret: 7800, alfagift: 6500, superindo: 8800 },
-  { month: 'Feb', totalSKU: 12200, segari: 8600, astro: 7300, klickIndomaret: 7900, alfagift: 6600, superindo: 8900 },
-  { month: 'Mar', totalSKU: 12400, segari: 8700, astro: 7400, klickIndomaret: 8000, alfagift: 6700, superindo: 9000 },
-  { month: 'Apr', totalSKU: 12300, segari: 8650, astro: 7350, klickIndomaret: 7950, alfagift: 6650, superindo: 8950 },
-  { month: 'May', totalSKU: 12500, segari: 8750, astro: 7450, klickIndomaret: 8050, alfagift: 6750, superindo: 9050 },
-  { month: 'Jun', totalSKU: 12600, segari: 8800, astro: 7500, klickIndomaret: 8100, alfagift: 6800, superindo: 9100 },
+  { month: 'Jan', totalSKU: 12000, segari: 8500, astro: 7200, klickIndomaret: 7800, alfagift: 6500, superindo: 8800, sayurbox: 7600 },
+  { month: 'Feb', totalSKU: 12200, segari: 8600, astro: 7300, klickIndomaret: 7900, alfagift: 6600, superindo: 8900, sayurbox: 7700 },
+  { month: 'Mar', totalSKU: 12400, segari: 8700, astro: 7400, klickIndomaret: 8000, alfagift: 6700, superindo: 9000, sayurbox: 7800 },
+  { month: 'Apr', totalSKU: 12300, segari: 8650, astro: 7350, klickIndomaret: 7950, alfagift: 6650, superindo: 8950, sayurbox: 7750 },
+  { month: 'May', totalSKU: 12500, segari: 8750, astro: 7450, klickIndomaret: 8050, alfagift: 6750, superindo: 9050, sayurbox: 7850 },
+  { month: 'Jun', totalSKU: 12600, segari: 8800, astro: 7500, klickIndomaret: 8100, alfagift: 6800, superindo: 9100, sayurbox: 7900 },
 ];
 
 // Missing data definition for daily discount comparison
@@ -341,17 +343,17 @@ const categoryPerformanceData = [
 
 // Category Performance by Channel
 const categoryChannelPerformanceData = [
-  { category: 'Susu', segari: 4500000, astro: 3200000, klickIndomaret: 3800000, superindo: 2100000, alfagift: 1900000 },
-  { category: 'Tisu', segari: 2800000, astro: 1900000, klickIndomaret: 2100000, superindo: 800000, alfagift: 500000 },
+  { category: 'Susu', segari: 4500000, astro: 3200000, klickIndomaret: 3800000, superindo: 2100000, alfagift: 1900000, sayurbox: 2800000 },
+  { category: 'Tisu', segari: 2800000, astro: 1900000, klickIndomaret: 2100000, superindo: 800000, alfagift: 500000, sayurbox: 1200000 },
 ];
 
 // New Price Comparison Table Data
 const priceComparisonTableData = [
-  { skuName: 'Ultramilk Strawberry 250ml', subCategory: 'Susu', astro: 125, segari: 118, klickIndomaret: 130, superindo: 115, alfagift: 127, avgPrice: 123 },
-  { skuName: 'Greenfields Fresh Milk 1L', subCategory: 'Susu', astro: 89, segari: 95, klickIndomaret: 92, superindo: 88, alfagift: 91, avgPrice: 91 },
-  { skuName: 'Diamond Premium Tissue', subCategory: 'Tisu', astro: 245, segari: 230, klickIndomaret: 255, superindo: 225, alfagift: 240, avgPrice: 239 },
-  { skuName: 'Prochiz Cheese Spread', subCategory: 'Susu', astro: 67, segari: 72, klickIndomaret: 70, superindo: 65, alfagift: 68, avgPrice: 68 },
-  { skuName: 'Mimi White Soft Tissue', subCategory: 'Tisu', astro: 156, segari: 148, klickIndomaret: 160, superindo: 145, alfagift: 152, avgPrice: 152 },
+  { skuName: 'Ultramilk Strawberry 250ml', subCategory: 'Susu', astro: 125, segari: 118, klickIndomaret: 130, superindo: 115, alfagift: 127, sayurbox: 121, avgPrice: 123 },
+  { skuName: 'Greenfields Fresh Milk 1L', subCategory: 'Susu', astro: 89, segari: 95, klickIndomaret: 92, superindo: 88, alfagift: 91, sayurbox: 90, avgPrice: 91 },
+  { skuName: 'Diamond Premium Tissue', subCategory: 'Tisu', astro: 245, segari: 230, klickIndomaret: 255, superindo: 225, alfagift: 240, sayurbox: 235, avgPrice: 239 },
+  { skuName: 'Prochiz Cheese Spread', subCategory: 'Susu', astro: 67, segari: 72, klickIndomaret: 70, superindo: 65, alfagift: 68, sayurbox: 69, avgPrice: 68 },
+  { skuName: 'Mimi White Soft Tissue', subCategory: 'Tisu', astro: 156, segari: 148, klickIndomaret: 160, superindo: 145, alfagift: 152, sayurbox: 150, avgPrice: 152 },
 ];
 
 // Brand Discount Table Data
@@ -830,6 +832,7 @@ const Dashboard = () => {
                     <TableHead className="text-center min-w-[140px]">Klik Indomaret</TableHead>
                     <TableHead className="text-center min-w-[120px]">Superindo</TableHead>
                     <TableHead className="text-center min-w-[120px]">Alfagift</TableHead>
+                    <TableHead className="text-center min-w-[120px]">Sayurbox</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -890,6 +893,7 @@ const Dashboard = () => {
               <Bar dataKey="alfagiftSales" fill="#ffc658" name="Alfagift" />
               <Bar dataKey="klickIndomaretSales" fill="#ff7300" name="Klikindomaret" />
               <Bar dataKey="mysuperindoSales" fill="#00ff00" name="MySuperIndo" />
+              <Bar dataKey="sayurboxSales" fill="#ff6b6b" name="Sayurbox" />
             </BarChart>
           </ResponsiveContainer>
         </CardContent>
@@ -1048,6 +1052,7 @@ const Dashboard = () => {
                 <TableHead className="text-center">Klik Indomaret</TableHead>
                 <TableHead className="text-center">Superindo</TableHead>
                 <TableHead className="text-center">Alfagift</TableHead>
+                <TableHead className="text-center">Sayurbox</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -1332,6 +1337,7 @@ const Dashboard = () => {
                         <TableHead className="text-center min-w-[140px]">Klikindomaret</TableHead>
                         <TableHead className="text-center min-w-[100px]">Alfagift</TableHead>
                         <TableHead className="text-center min-w-[120px]">MySuperIndo</TableHead>
+                        <TableHead className="text-center min-w-[100px]">Sayurbox</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -1403,6 +1409,7 @@ const Dashboard = () => {
                 <Bar dataKey="klickIndomaret" fill="#ffc658" name="Klik Indomaret" />
                 <Bar dataKey="alfagift" fill="#ff7300" name="Alfagift" />
                 <Bar dataKey="superindo" fill="#00ff00" name="SuperIndo" />
+                <Bar dataKey="sayurbox" fill="#ff6b6b" name="Sayurbox" />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
@@ -1447,6 +1454,7 @@ const Dashboard = () => {
               <Line type="monotone" dataKey="klickIndomaret" stroke="#ffc658" strokeWidth={2} name="Klik Indomaret" />
               <Line type="monotone" dataKey="alfagift" stroke="#ff7300" strokeWidth={2} name="Alfagift" />
               <Line type="monotone" dataKey="superindo" stroke="#00ff00" strokeWidth={2} name="SuperIndo" />
+              <Line type="monotone" dataKey="sayurbox" stroke="#ff6b6b" strokeWidth={2} name="Sayurbox" />
             </LineChart>
           </ResponsiveContainer>
         </CardContent>
@@ -1517,6 +1525,7 @@ const Dashboard = () => {
               <Bar dataKey="klickIndomaret" fill="#ffc658" name="Klik Indomaret" />
               <Bar dataKey="superindo" fill="#ff7300" name="Superindo" />
               <Bar dataKey="alfagift" fill="#00ff00" name="Alfagift" />
+              <Bar dataKey="sayurbox" fill="#ff6b6b" name="Sayurbox" />
             </BarChart>
           </ResponsiveContainer>
         </CardContent>
@@ -1577,6 +1586,7 @@ const Dashboard = () => {
                 <TableHead className="text-center">Klik Indomaret</TableHead>
                 <TableHead className="text-center">Superindo</TableHead>
                 <TableHead className="text-center">Alfagift</TableHead>
+                <TableHead className="text-center">Sayurbox</TableHead>
                 <TableHead className="text-center">Avg Price</TableHead>
               </TableRow>
             </TableHeader>
@@ -1687,6 +1697,7 @@ const Dashboard = () => {
               <Line type="monotone" dataKey="klikindomaret" stroke="#ffc658" strokeWidth={2} name="Klik Indomaret" />
               <Line type="monotone" dataKey="alfagift" stroke="#ff7300" strokeWidth={2} name="Alfagift" />
               <Line type="monotone" dataKey="mysuperindo" stroke="#00ff00" strokeWidth={2} name="MySuperIndo" />
+              <Line type="monotone" dataKey="sayurbox" stroke="#ff6b6b" strokeWidth={2} name="Sayurbox" />
             </LineChart>
           </ResponsiveContainer>
         </CardContent>
@@ -1784,6 +1795,7 @@ const Dashboard = () => {
                 <TableHead className="text-center">Klik Indomaret</TableHead>
                 <TableHead className="text-center">Superindo</TableHead>
                 <TableHead className="text-center">Alfagift</TableHead>
+                <TableHead className="text-center">Sayurbox</TableHead>
                 <TableHead className="text-center">Sales with Discount</TableHead>
                 <TableHead className="text-center">Sales No Discount</TableHead>
                 <TableHead className="text-center">% Uplift</TableHead>
